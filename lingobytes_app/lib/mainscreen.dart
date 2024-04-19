@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+
 
 class Mainscreen extends StatefulWidget {
   @override
@@ -8,10 +9,10 @@ class Mainscreen extends StatefulWidget {
 }
 
 class _MainscreenState extends State<Mainscreen> {
-  final player = AudioPlayer();
   User? user = FirebaseAuth.instance.currentUser;
   bool showQuiz = false;
   late var user_email = user?.email;
+  final FlutterTts flutterTts = FlutterTts();
   final List<Story> stories = [
     Story(
       title: "The Three Little Pigs",
@@ -36,7 +37,7 @@ class _MainscreenState extends State<Mainscreen> {
         "assets/images/BookImages/3LittlePigs/1.png",
       ],
       soundPaths: [
-        "assets/sounds/BookSounds/3LittlePigs/1.caf",
+        "assets/sounds/BookSounds/3LittlePigs/1.mp3",
       ],
     ),
     Story(
@@ -81,9 +82,11 @@ class _MainscreenState extends State<Mainscreen> {
       ],
     },
   ];
+
   @override
   void initState() {
     super.initState();
+    flutterTts.setLanguage("en-US");
   }
   Widget build(BuildContext context) {
     Widget _bookContent() {
@@ -134,7 +137,12 @@ class _MainscreenState extends State<Mainscreen> {
                 ElevatedButton(
                   onPressed: currentPage <
                       stories[currentStory].pages.length - 1
-                      ? () => setState(() => currentPage++)
+                      ? () {
+                    setState(() {
+                      currentPage++;
+                    });
+                    flutterTts.speak(stories[currentStory].pages[currentPage]);
+                  }
                       : null,
                   child: Text("Next"),
                   style: ButtonStyle(
