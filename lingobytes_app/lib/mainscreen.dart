@@ -9,9 +9,9 @@ class Mainscreen extends StatefulWidget {
 }
 
 class _MainscreenState extends State<Mainscreen> {
-  // User? user = FirebaseAuth.instance.currentUser;
+  User? user = FirebaseAuth.instance.currentUser;
   bool showQuiz = false;
-  // late var user_email = user?.email;
+  late var user_email = user?.email;
   final FlutterTts flutterTts = FlutterTts();
   final List<Story> stories = [
     Story(
@@ -181,20 +181,20 @@ class _MainscreenState extends State<Mainscreen> {
           drawer: Drawer(
             child: ListView(
               children: [
-                // UserAccountsDrawerHeader(
-                //   currentAccountPicture: CircleAvatar(
-                //     backgroundImage: NetworkImage(
-                //         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbBqkzkIZcbJ--7JT_4uRYCsW32sRec3jJcnWwzhbjCw&s'),
-                //   ),
-                //   accountEmail: Text(user_email!),
-                //   accountName: Text(
-                //     user_email!,
-                //     style: TextStyle(fontSize: 24.0),
-                //   ),
-                //   decoration: BoxDecoration(
-                //     color: Colors.black87,
-                //   ),
-                // ),
+                UserAccountsDrawerHeader(
+                  currentAccountPicture: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbBqkzkIZcbJ--7JT_4uRYCsW32sRec3jJcnWwzhbjCw&s'),
+                  ),
+                  accountEmail: Text(user_email!),
+                  accountName: Text(
+                    user_email!,
+                    style: TextStyle(fontSize: 24.0),
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.black87,
+                  ),
+                ),
                 ExpansionTile(
                   title: Text("Section 1; Starting Out"),
                   children: [
