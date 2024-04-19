@@ -29,8 +29,22 @@ Create a new folder with your team's name and include all your project files wit
 Include a README.md in your project folder detailing:
 
 Project overview
+Our product, LingoBytes, is an app available on iOS and Android that aims to help
+young students improve their reading skills, with a special emphasis on visually 
+impaired students by providing them with a variety of accessibility features. We aim
+to not only empower education systems, but also promote equity and diversity and
+spread global awareness on this issue. 
 Technologies used
+1. Flutter
+2. HTML, CSS, JavaScript
+3. Flex Sensors 
+4. ESP8266 Board
+5. Arduino IDE
+6. Blynk IOT
 Team members
+1. Rignesh Achar Padamanur
+2. Akhilesh Singaraju
+3. Shaurya Raju Mantena
 Installation/running instructions
 
 🚀 Participation Rules
