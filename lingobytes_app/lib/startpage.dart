@@ -24,7 +24,7 @@ class StartPage extends StatelessWidget {
               width: 200,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                  Navigator.pushNamed(context, '/main');
                 },
                 child: Text('Login'),
                 style: ButtonStyle(
