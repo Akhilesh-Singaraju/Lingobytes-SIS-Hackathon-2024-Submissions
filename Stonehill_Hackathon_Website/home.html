@@ -302,7 +302,7 @@
 
         }
         .faq-q-container{
-            background-color: #c7d7d0;
+            background-color: #ECFDF5;
             position: relative;
             width: 30%;
             height: 700px;
@@ -314,19 +314,53 @@
         .faq-q-container h1{
             position: relative;
             top:50px;
-            left: 70px;
+            left: 25px;
             color: #064E3B;
             font-size: 50px;
             text-align: left;
             margin: -5px;
         }
+        .faq-q-container p{
+            position:relative;
+            top:70px;
+            left:25px;
+            color:#064E3B;
+            font-size:20px;
+            text-align: left;
+            margin: -5px;
+        }
+        .accordion {
+        position:relative;
+        top:120px;
+        background-color: #ECFDF5;
+        color: #064E3B;
+        cursor: pointer;
+        padding: 18px;
+        text-align:left;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 18px;
+        width: 100%;
+        border:none;
+        outline-width:none;
+        transition: 0.4s; 
+        }
+        .active, .accordion:hover {
+        background-color: #a7c1b7;
+        }
+        .panel {
+        padding: 0 18px;
+        background-color: white;
+        display: none;
+        overflow: hidden;
+        }
+
     </style>
 </head>
 <body>
     <h4><a href="home.html">LingoBytes</a></h4>
     <button class="join-now-button">Join Now</button>
     <div class="home">
-        <a href="home.html">Home</a>
+        <a href="home.html">Mission</a>
     </div>
     <div class="faq">
         <a href="faq.html">FAQ</a>
@@ -392,6 +426,43 @@
         <div class="faq-q-container">
             <h1>Common</h1>
             <h1>Questions</h1>
+            <p>Find answers to frequent inquiries about</p>
+            <p>LingoBytes and it's features.</p>
+            <button class="accordion">
+                How do I customize gestures?
+                <img src="dropdown_arrow.png">
+            </button>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
+            <button class="accordion">
+                What content is available?
+                <img src="dropdown_arrow.png">
+            </button>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
+            <button class="accordion">
+                Can I share my books?
+                <img src="dropdown_arrow.png">
+            </button>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
+            <button class="accordion">
+                Is LingoBytes accessible for all?
+                <img src="dropdown_arrow.png">
+            </button>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
+            <button class="accordion">
+                Are there parental controls?
+                <img src="dropdown_arrow.png">
+            </button>
+            <div class="panel">
+                <p>Lorem ipsum...</p>
+            </div>
         </div>
     </div>
     <script>
