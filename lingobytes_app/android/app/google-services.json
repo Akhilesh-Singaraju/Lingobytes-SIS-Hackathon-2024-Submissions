@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "441708942878",
+    "project_id": "lingobytes-e63fc",
+    "storage_bucket": "lingobytes-e63fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441708942878:android:01750750f66177cd45c00f",
+        "android_client_info": {
+          "package_name": "com.example.lingobytes_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVXIAPPG7egCe4A8qvYC1BGrkLGCU8g3A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
