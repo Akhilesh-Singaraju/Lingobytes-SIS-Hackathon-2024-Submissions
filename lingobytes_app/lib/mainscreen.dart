@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 class Mainscreen extends StatefulWidget {
 
@@ -13,6 +12,7 @@ class _MainscreenState extends State<Mainscreen> {
   User? user = FirebaseAuth.instance.currentUser;
   bool muted = false;
   bool showQuiz = false;
+  bool dashboard = true;
 
   final flutterTts = FlutterTts();
   late var user_email = user?.email;
@@ -90,6 +90,22 @@ class _MainscreenState extends State<Mainscreen> {
   void speakText(String text) async {
     await flutterTts.speak(text);
   }
+
+  Widget _dashboardContent() {
+    return Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Hello!",
+                style: TextStyle(fontSize: 20),
+              ),
+            ]
+        )
+    );
+  }
+
+
   Widget build(BuildContext context) {
     Widget _bookContent() {
       return Stack(
@@ -193,7 +209,7 @@ class _MainscreenState extends State<Mainscreen> {
                             muted = true;
                           }
                         }
-                    ))
+                    )),
               ],
             ),
           ),
@@ -235,12 +251,22 @@ class _MainscreenState extends State<Mainscreen> {
                     color: Colors.black87,
                   ),
                 ),
+                ListTile(
+                  title: Text("Dashboard"),
+                  onTap: () {
+                    dashboard = true;
+                    setState(() {
+
+                    });
+                  },
+                ),
                 ExpansionTile(
                   title: Text("Section 1; Starting Out"),
                   children: [
                     ListTile(
                       title: Text("The Three Little Pigs"),
                       onTap: () {
+                        dashboard = false;
                         setState(() {
                           currentStory = 0;
                           currentPage = 0;
@@ -251,6 +277,7 @@ class _MainscreenState extends State<Mainscreen> {
                     ListTile(
                       title: Text("The Little Red Riding Hood"),
                       onTap: () {
+                        dashboard = false;
                         setState(() {
                           currentStory = 1;
                           currentPage = 0;
@@ -263,7 +290,7 @@ class _MainscreenState extends State<Mainscreen> {
               ],
             ),
           ),
-          body: _bookContent()
+          body: dashboard ? _dashboardContent() : _bookContent()
         )
     );
   }

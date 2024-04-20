@@ -6,6 +6,7 @@ import 'package:lingobytes_app/login.dart';
 import 'package:lingobytes_app/signup.dart';
 import 'package:lingobytes_app/checkemail.dart';
 import 'package:lingobytes_app/mainscreen.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
