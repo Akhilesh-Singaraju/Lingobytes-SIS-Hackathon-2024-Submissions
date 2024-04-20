@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-
-
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 class Mainscreen extends StatefulWidget {
+
   @override
   _MainscreenState createState() => _MainscreenState();
 }
 
 class _MainscreenState extends State<Mainscreen> {
   User? user = FirebaseAuth.instance.currentUser;
+  bool muted = false;
   bool showQuiz = false;
+  SpeechToText _speechToText = SpeechToText();
+  bool _speechEnabled = false;
+  String _speechText = '';
+  final flutterTts = FlutterTts();
   late var user_email = user?.email;
-  final FlutterTts flutterTts = FlutterTts();
   final List<Story> stories = [
     Story(
       title: "The Three Little Pigs",
@@ -36,9 +41,6 @@ class _MainscreenState extends State<Mainscreen> {
         "assets/images/BookImages/3LittlePigs/1.png",
         "assets/images/BookImages/3LittlePigs/1.png",
       ],
-      soundPaths: [
-        "assets/sounds/BookSounds/3LittlePigs/1.mp3",
-      ],
     ),
     Story(
       title: "The Little Red Riding Hood",
@@ -48,9 +50,7 @@ class _MainscreenState extends State<Mainscreen> {
       imagePaths: [
         "assets/images/lingobytes-icon.png",
       ],
-      soundPaths: [
-        "assets/images/BookImages/3LittlePigs/1.caf",
-      ],
+
     ),
   ];
 
@@ -86,7 +86,33 @@ class _MainscreenState extends State<Mainscreen> {
   @override
   void initState() {
     super.initState();
+    initStt();
     flutterTts.setLanguage("en-US");
+  }
+
+  Future<void> initStt() async {
+    _speechEnabled = await _speechToText.initialize();
+    setState(() {});
+  }
+  void _startListening() async {
+    await _speechToText.initialize();
+    await _speechToText.listen(onResult: _onSpeechResult);
+    setState(() {});
+  }
+
+  void _stopListening() async {
+    await _speechToText.stop();
+    setState(() {});
+  }
+  void _onSpeechResult(SpeechRecognitionResult result) {
+    setState(() {
+      _speechText = result.recognizedWords;
+      print(_speechText);
+    });
+  }
+
+  void speakText(String text) async {
+    await flutterTts.speak(text);
   }
   Widget build(BuildContext context) {
     Widget _bookContent() {
@@ -111,7 +137,7 @@ class _MainscreenState extends State<Mainscreen> {
             ),
           ),
           Positioned(
-            bottom: 20.0, // Adjust spacing as needed
+            bottom: 20.0,
             left: 0.0,
             right: 0.0,
             child: Row(
@@ -140,8 +166,8 @@ class _MainscreenState extends State<Mainscreen> {
                       ? () {
                     setState(() {
                       currentPage++;
+                      speakText(stories[currentStory].pages[currentPage]);
                     });
-                    flutterTts.speak(stories[currentStory].pages[currentPage]);
                   }
                       : null,
                   child: Text("Next"),
@@ -154,6 +180,54 @@ class _MainscreenState extends State<Mainscreen> {
                       borderRadius: BorderRadius.circular(10),
                     )),
                   ),),
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 20.0,
+            left: 0.0,
+            right: 20.0,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                SizedBox(
+                    height: 40,
+                    width: 40,
+                    child: FloatingActionButton(
+                        child: Icon(Icons.restart_alt_outlined),
+                        onPressed: (){
+                          setState(() {
+                            speakText(stories[currentStory].pages[currentPage]);
+                          });
+                        }
+                    )),
+                SizedBox(height: 10,),
+                // SizedBox(
+                //     height: 40,
+                //     width: 40,
+                //     child: FloatingActionButton(
+                //         child: Icon(Icons.volume_off),
+                //         onPressed: () async {
+                //           if(muted){
+                //             await flutterTts.setVolume(1.0);
+                //             muted = false;
+                //           } else{
+                //             await flutterTts.setVolume(0.0);
+                //             muted = true;
+                //           }
+                //         }
+                //     ))
+                SizedBox(
+                  height: 40,
+                  width: 40,
+                  child: FloatingActionButton(
+                    child: Icon(_speechToText.isNotListening ? Icons.mic_off : Icons.mic),
+                    onPressed: () async {
+                      _speechToText.isNotListening ? _startListening() : _stopListening();
+                    },
+                  ),
+                ),
               ],
             ),
           ),
@@ -204,6 +278,7 @@ class _MainscreenState extends State<Mainscreen> {
                         setState(() {
                           currentStory = 0;
                           currentPage = 0;
+                          speakText(stories[currentStory].pages[currentPage]);
                         });
                       },
                     ),
@@ -213,6 +288,7 @@ class _MainscreenState extends State<Mainscreen> {
                         setState(() {
                           currentStory = 1;
                           currentPage = 0;
+                          speakText(stories[currentStory].pages[currentPage]);
                         });
                       },
                     ),
@@ -231,7 +307,6 @@ class Story {
   final String title;
   final List<String> pages;
   final List<String> imagePaths;
-  final List<String> soundPaths;
 
-  Story({required this.title, required this.pages, required this.imagePaths, required this.soundPaths});
+  Story({required this.title, required this.pages, required this.imagePaths});
 }

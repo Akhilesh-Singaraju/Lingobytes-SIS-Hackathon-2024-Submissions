@@ -1,33 +1,27 @@
 #define BLYNK_PRINT Serial
-#define BLYNK_AUTH_TOKEN "fTo26_BwRrJOiIhDeroObUdNwPUG7b3L" 
-#define BLYNK_TEMPLATE_ID "TMPL3swmcaHA_"
-#define BLYNK_TEMPLATE_NAME "LingoBytes"
+#define BLYNK_TEMPLATE_ID "TMPL37vyzgzWK"
+#define BLYNK_TEMPLATE_NAME "Quickstart Template"
+#define BLYNK_AUTH_TOKEN "iq8-LS-2TMA9zrDZ7pf7dNjpaWndMYo-"
 
 #include <ESP8266WiFi.h> 
 #include <BlynkSimpleEsp8266.h> 
 
-char ssid[] = "Shaurya Raju's iPhone"; 
-char pass[] = "imnotoklol"; 
+const int flexPin = A0;
 
-int flexPin = A0; 
-int flexVal; 
+char ssid[] = "Posiedon"; 
+char pass[] = "198228.civ"; 
 
-BlynkTimer timer; 
+void setup()
+{
+  Serial.begin(115200);
 
-void myTimer() {
-  Blynk.virtualWrite(A0, flexVal); 
+  Blynk.begin(BLYNK_AUTH_TOKEN, ssid, pass);
 }
 
-void setup() {
-  Serial.begin(9600);  
-  Blynk.begin(BLYNK_AUTH_TOKEN, ssid, pass); 
-  timer.setInterval(1000L, myTimer); 
-}
-
-void loop() {
-  flexVal = analogRead(flexPin); 
-  Blynk.run(); 
-  timer.run(); 
-  Serial.println(flexVal);
-  delay(100);
+void loop()
+{
+  Blynk.run();
+  int flexValue = analogRead(flexPin);
+  Blynk.virtualWrite(V0, flexValue);
+  delay(1000);
 }
