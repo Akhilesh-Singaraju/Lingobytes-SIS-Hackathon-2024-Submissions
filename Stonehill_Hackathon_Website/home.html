@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homet</title>
+    <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+        }
+            to {
+                opacity: 1;
+        }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+        }
+            to {
+                opacity: 0;
+        }
+        }
+
+        body {
+            background-color: #ECFDF5;
+            margin: 10;
+            position: relative; 
+        }
+        h4 a{
+            position: absolute;
+            top: 5px;
+            left: 50px; 
+            color: #064E3B; 
+            font-weight: normal; 
+            text-decoration: none;
+        }
+
+        .join-now-button {
+            position: absolute;
+            top: 0px; 
+            right: 10px; 
+            padding: 10px 20px;
+            background-color: #65A30D; 
+            color: white; 
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+        .join-now-button a{
+            text-decoration: none;
+            color: white;
+        }
+        .join-now-button:hover{
+            background-color: #4d9900;
+        }
+        .home a{
+            position: absolute;
+            top: 8px;
+            right: 300px; 
+            color: #064E3B;
+            font-weight: normal;
+            text-decoration: none;
+        }
+        .faq a{
+            position: absolute;
+            top: 8px;
+            right: 200px;
+            color: #064E3B; 
+            font-weight: normal;
+            text-decoration: none;
+        }
+        .gesture{
+            padding-top: 5%;
+            text-align: center;
+            color: #064E3B;
+            font-size: 50px;
+        }
+        .gesture h1{
+            margin: 0;
+        }
+
+        .green-text {
+            color: #059669;
+            text-align: center;
+            font-size: 24px;
+            margin-top: 20px; 
+        }
+        .get-started-button {
+            display: block;
+            width: 350px;
+            margin: 30px auto; 
+            padding: 30px 50px;
+            background-color: #65A30D;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 15px;
+            text-decoration: none;
+        }
+        .get-started-button a{
+            text-decoration: none;
+            color: white;
+        }
+        .get-started-button:hover {
+            background-color: #4d9900;
+            text-decoration: none;
+        }
+        .big-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .big-image {
+            display: block;
+            margin-top: 100px;
+            width: 50%;
+            height: auto;
+            border-radius: 10px;
+            position: relative;
+            text-align: center;
+            z-index: 3;
+        }
+
+        .half-hidden-image {
+            position: absolute;
+            overflow: hidden;
+            border-radius: 10px;
+            top: 15%;
+            right: 90px; 
+            width: 30%; 
+            float:right;
+            z-index: 2;
+        }
+        .rectangle {
+            position: absolute;
+            top: 820px; 
+            left: 0;
+            width: 80%;
+            height: 336px;
+            background-color: grey;
+            opacity: 0.03;
+            z-index: 1;
+        }
+        .text-container {
+            position: absolute;
+            top: 1750px;
+            left: 0;
+            width: 50%; 
+            padding: 20px; 
+            z-index: 4; 
+        }
+        .text-container h1 {
+            color:#65A30D; 
+            font-size: 40px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .text-container h2 {
+            color: #059669;
+            font-size: 40px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .right-image {
+            position: absolute;
+            top: 1500px; 
+            right: 0;
+            width: 50%; 
+            z-index: 4; 
+            border-radius: 10px;
+        }
+        .text-rect {
+            position: absolute;
+            top: 1500px; 
+            left: 0;
+            width: 80%;
+            height: 830px;
+            background-color: grey;
+            opacity: 0.008;
+            z-index: 1;
+        }
+        .hands-container {
+            position: absolute;
+            top: 2400px;
+            width: 98%; 
+            padding: 20px; 
+            z-index: 4; 
+        }
+        .hands-container h1{
+            position: relative;
+            top:0;
+            color: #064E3B;
+            font-size: 50px;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .hands-container p{
+            position: relative;
+            top:1px;
+            font-size: 15px;
+            color: #059669;
+            text-align: center;
+        }
+        .explain-container {
+            position: relative;
+            top: 1450px;
+            width: 50%; 
+            padding: 20px; 
+            z-index: 4; 
+        }
+        .explain-container h4{
+            font-family: sans-serif;
+            position: relative;
+            left: 350px;
+            color: #064E3B;
+        }
+        .explain-container p{
+            font-family: sans-serif;
+            position: relative;
+            top:5px;
+            color:#059669;
+            left: 350px;
+            margin: -1px;
+        }
+        .phone-container {
+            position: relative;
+            top: 1000px;
+            left: 1000px;
+            width: 40%;
+            padding: 20px;
+            z-index: 4;
+        }
+        .phone-image {
+            width: 20em;
+            height: auto;
+        }
+        .setup-container {
+            position: relative;
+            top: 1200px;
+            width: 50%;
+            height: 200px;
+            z-index: 4;
+        }
+        .setup-container h1{
+            position: relative;
+            top:0;
+            left: 70px;
+            color: #064E3B;
+            font-size: 50px;
+            text-align: left;
+            margin-top: 50px;
+        }
+        .setup-container p{
+            font-family: sans-serif;
+            position: relative;
+            top:10px;
+            color:#059669;
+            left: 100px;
+            margin: 40px;
+        }
+        .ontop-container{
+            position: relative;
+            top: 800px;
+            left: 900px;
+            width: 40%;
+            padding: 20px;
+            z-index: 5;
+        }
+
+        .ontop-image {
+            width: 40em;
+            height: auto;
+            border-radius: 15px;
+        }
+        .opac-image {
+            border-radius: 15px;
+            opacity: 0.5;
+            bottom: 782px;
+            right: 20px;
+            height: 500px;
+            position: relative;
+            padding: 20px;
+            z-index: 6;
+            width: 40em;
+        }
+        .experience-btn {
+            position: relative;
+            top:160px;
+            left: 74.5%;
+            transform: translateX(-50%);
+            width: 250px;
+            height: 50px;
+            background-color: #ECFDF5;
+            color: #064E3B;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 15px;
+            text-decoration: none;
+            z-index: 5; 
+        }
+        .experience-btn a{
+            text-decoration: none;
+            color: #064E3B;
+        }
+        .experience-btn:hover{
+            background-color: #b7dae4;
+        }
+        .setup-icons {
+            position: relative;
+            width: 1.5%;
+            height: 25px;
+            bottom:300px;
+            left:90px;
+            z-index: 5;
+        }
+        .faq-image-container{
+            text-align: center;
+            position: relative;
+            display: block;
+            right: 0;
+            left: -8px;
+            height: 800px;
+            top:250px; 
+            z-index: 5;
+        }
+        .faq-image{
+            width: 80em;
+            border-radius: 15px;
+
+        }
+        .faq-q-container{
+            background-color: #ECFDF5;
+            position: relative;
+            width: 30%;
+            height: 700px;
+            bottom: 775px;
+            left: 900px;
+            z-index: 6;
+            border-radius: 15px;
+        }
+        .faq-q-container h1{
+            position: relative;
+            top:50px;
+            left: 25px;
+            color: #064E3B;
+            font-size: 50px;
+            text-align: left;
+            margin: -5px;
+        }
+        .faq-q-container p{
+            position:relative;
+            top:70px;
+            left:25px;
+            color:#064E3B;
+            font-size:15px;
+            text-align: left;
+            margin: 0px;
+        }
+        .accordion {
+            position:relative;
+            top:120px;
+            background-color: #ECFDF5;
+            color: #064E3B;
+            cursor: pointer;
+            padding: 18px;
+            text-align:left;
+            font-family: sans-serif;
+            font-size: 18px;
+            width: 100%;
+            border:none;
+            outline-width:none;
+            transition: 0.4s; 
+            overflow: visible;
+        }
+        .accordion hr{
+            opacity: 0.3;
+            border-radius: 15px;
+        }
+        .active, .accordion:hover {
+            background-color: #cfded8;
+        }
+        #arrow1 {
+            position: absolute;
+            width: 2em;
+            top:10px;
+            left:85%;
+        }
+        #arrow2 {
+            position: absolute;
+            width: 2em;
+            top:10px;
+            left:85%;
+        }
+        #arrow3 {
+            position: absolute;
+            width: 2em;
+            top:10px;
+            left:85%;
+        }
+        #arrow4 {
+            position: absolute;
+            width: 2em;
+            top:10px;
+            left:85%;
+        }
+        #arrow5 {
+            position: absolute;
+            width: 2em;
+            top:10px;
+            left:85%;
+        }
+        .panel1 {
+            position: relative;
+            display: none;
+            top:100px;
+            width: 100%;
+            height: 10px;
+        }
+        .panel1 p{
+            position: relative;
+            top:0;
+            font-size: 10px;
+            color: #064E3B;
+            text-align: left;
+        }
+        .panel2 {
+            position: relative;
+            display: none;
+            top:100px;
+            width: 100%;
+            height: 10px;
+        }
+        .panel2 p{
+            position: relative;
+            top:0;
+            font-size: 10px;
+            color: #064E3B;
+            text-align: left;
+        }
+        .panel3 {
+            position: relative;
+            display: none;
+            top:100px;
+            width: 100%;
+            height: 10px;
+        }
+        .panel3 p{
+            position: relative;
+            top:0;
+            font-size: 10px;
+            color: #064E3B;
+            text-align: left;
+        }
+        .panel4 {
+            position: relative;
+            display: none;
+            top:100px;
+            width: 100%;
+            height: 10px;
+        }
+        .panel4 p{
+            position: relative;
+            top:0;
+            font-size: 10px;
+            color: #064E3B;
+            text-align: left;
+        }
+        .panel5 {
+            position: relative;
+            display: none;
+            top:100px;
+            width: 100%;
+            height: 10px;
+        }
+        .panel5 p{
+            position: relative;
+            top:0;
+            font-size: 10px;
+            color: #064E3B;
+            text-align: left;
+        }
+        .fade-in-out{
+            animation: fadeIn 1s ease-in-out, fadeOut 1s ease-in-out
+        }
+    </style>
+</head>
+<body>
+    <section id="all">
+    <h4><a href="home.html">LingoBytes</a></h4>
+    <button class="join-now-button"><a href="https://apps.apple.com/us/app/wechat/id836500024?mt=12">Join Now</a></button>
+    <div class="home">
+        <a href="#Mission">Mission</a>
+    </div>
+    <div class="faq">
+        <a href="#faqq">FAQ</a>
+    </div> 
+
+    <section id="start" class="fade-in-out">
+    <div class="gesture">
+        <h1>Gesture-</h1>
+        <h1>Powered</h1>
+        <h1>Reading</h1>
+    </div>
+    <div class="green-text">
+        Innovative accessibility for all
+    </div>
+    <button class="get-started-button"><a href="https://apps.apple.com/us/app/wechat/id836500024?mt=12">Get Started Now</a></button>
+    <div class="big-image-container">
+        <img src="https://images.newscientist.com/wp-content/uploads/2023/08/14123428/SEI_167282088.jpg?width=1200" alt="Big Image" class="big-image">
+    </div>
+    <img src="https://miro.medium.com/v2/resize:fit:1400/1*JIFhLNh1crkJXZJtZbCfnQ.jpeg" alt="Half Hidden Image" class="half-hidden-image">
+    <div class="rectangle"></div>
+    </section>
+
+    <section id="Mission" class="fade-in-out">
+    <div class="text-container">
+        <h1>Inclusive Vision</h1>
+        <h2>Dedicated to creating an e-book experience that's universally accessible and promotes diversity.<h2>
+    </div>
+    <img src="https://st5.depositphotos.com/43247796/65410/i/450/depositphotos_654109148-stock-photo-closeup-hands-painted-different-colors.jpg" alt="Right Image" class="right-image">
+    <div class="text-rect"></div>
+    </section>
+    
+    <section id="nav" class="fade-in-out">
+    <div class="hands-container">
+        <h1>Educational Control</h1>
+        <p>Navigate your e-book and take control of your own education.</p>
+    </div>
+    <div class="explain-container">
+        <h4>Gesture Recognition</h4>
+        <p>Intuitive finger movements to flip pages, voice changes, and </p>
+        <p>more</p>
+    </div>
+    <div class="explain-container">
+        <h4>Diverse Library</h4>
+        <p>Curated content that celebrates diverse voices. </p>
+    </div>
+    <div class="explain-container">
+        <h4>Equitable Settings</h4>
+        <p>Adjustable settings for all levels of ability and comfort.</p>
+    </div>
+    <div class="phone-container">
+        <img src="Screenshot 2024-04-19 at 2.58.23 PM.png" alt="Phone Image" class="phone-image">
+    </div>
+    </section>
+
+    <section id="setup" class="fade-in-out"> 
+    <div class="setup-container">
+        <h1>Simple Setup</h1>
+        <p>Download the app and sync to your device effortlessly.</p>
+        <p>Use voice commands to navigate the interface.</p>
+        <p>Simply say "Go to" followed by the part of the app you want to go to.</p>
+    </div>
+    <div class="ontop-container">
+        <img src="phone-skeleton.png" alt="Phone Image" class="ontop-image">
+        <img src="https://cdn.pixabay.com/photo/2015/01/15/16/17/hands-600497_640.jpg" alt="Opacity filter" class="opac-image">
+    </div>
+    <button class="experience-btn"><a href="https://apps.apple.com/us/app/wechat/id836500024?mt=12">Experience LingoBytes</a></button>
+    <div class="setup-icons">
+        <img src="chat.png" alt="Chat icon">
+        <img src="customize.png" alt="Custom icon">
+        <img src="personalize.png" alt="Personalize icon">
+    </div>
+    </section>
+
+    <section id="faqq" class="fade-in-out">
+    <div class="faq-image-container">
+        <img src="https://images.newscientist.com/wp-content/uploads/2023/08/14123428/SEI_167282088.jpg?width=1200" alt="learn" class="faq-image">
+        <div class="faq-q-container">
+            <h1>Common</h1>
+            <h1>Questions</h1>
+            <p>Find answers to frequent inquiries about LingoBytes and it's features.</p>
+            <button class="accordion" id="accordion1">
+                How do I customize gestures?
+                <img id="arrow1" src="dropdown_arrow.png">
+                <hr color="#A7F3D0">
+            </button>
+
+            <div class="panel1" id="panel1id">
+                <p>Gestures are easily customized by using buttons to interact with the app. Users can click two buttons at once to </p>
+                <p>prompt a settings tab from where they can edit their existing settings.</p>
+            </div>
+            
+            <button class="accordion" id="accordion2">
+                What content is available?
+                <img id="arrow2" src="dropdown_arrow.png">
+                <hr color="#A7F3D0">
+            </button>
+            <div class="panel2" id="panel2id">
+                <p>The content that LingoBytes offers varies from difficulty levels—ranging from easy (just starting out), and goes till a challenging level which is for higher level users.</p>
+            </div>
+            <button class="accordion">
+                Can I share my books?
+                <img id="arrow3" src="dropdown_arrow.png">
+                <hr color="#A7F3D0">
+            </button>
+            <div class="panel3" id="panel3id">
+                <p>Unfortunately, sharing with others is not currently avaulable at the moment, but we are planning to add that as a future update so stay tuned!</p>
+            </div>
+            <button class="accordion">
+                Is LingoBytes accessible for all?
+                <img id="arrow4" src="dropdown_arrow.png">
+                <hr color="#A7F3D0">
+            </button>
+            <div class="panel4" id="panel4id">
+                <p>Of Course! LinoBytes is versatile and accessible for all users, and holds a special emphasis on the visually impared </p>
+                <p>children around the world who are unable to cross learning barriers because of their disabilities.</p>
+            </div>
+            <button class="accordion">
+                Are there parental controls?
+                <img id="arrow5" src="dropdown_arrow.png">
+                <hr color="#A7F3D0">
+            </button>
+            <div class="panel5" id="panel5id">
+                <p>No, parental controls are not enabled for this app because it is an educational app and does not require any sort of </p>
+                <p>extra parental supervision.</p>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    </section>
+    <script>
+        document.getElementById('arrow1').addEventListener('click', function(){
+            if (document.getElementById('panel1id').style.display == "block"){
+                document.getElementById('panel1id').style.display="none"
+            } else {
+                document.getElementById('panel1id').style.display="block"
+            }
+        })
+        document.getElementById('arrow2').addEventListener('click', function(){
+            if (document.getElementById('panel2id').style.display == "block"){
+                document.getElementById('panel2id').style.display="none"
+            } else {
+                document.getElementById('panel2id').style.display="block"
+            }
+        })
+        document.getElementById('arrow3').addEventListener('click', function(){
+            if (document.getElementById('panel3id').style.display == "block"){
+                document.getElementById('panel3id').style.display="none"
+            } else {
+                document.getElementById('panel3id').style.display="block"
+            }
+        })
+        document.getElementById('arrow4').addEventListener('click', function(){
+            if (document.getElementById('panel4id').style.display == "block"){
+                document.getElementById('panel4id').style.display="none"
+            } else {
+                document.getElementById('panel4id').style.display="block"
+            }
+        })
+        document.getElementById('arrow5').addEventListener('click', function(){
+            if (document.getElementById('panel5id').style.display == "block"){
+                document.getElementById('panel5id').style.display="none"
+            } else {
+                document.getElementById('panel5id').style.display="block"
+            }
+        })
+        document.addEventListener('DOMContentLoaded', function() {
+            var sections = document.querySelectorAll('section');
+            sections.forEach(function(section) {
+                section.classList.add('fade-in');
+            })
+        })
+
+    </script>
+    
+    
+        
+</body>
+</html>
