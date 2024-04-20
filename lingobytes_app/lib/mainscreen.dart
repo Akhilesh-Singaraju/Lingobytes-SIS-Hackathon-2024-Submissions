@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:speech_to_text/speech_recognition_result.dart';
-import 'package:speech_to_text/speech_to_text.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+
 class Mainscreen extends StatefulWidget {
 
   @override
@@ -13,9 +13,7 @@ class _MainscreenState extends State<Mainscreen> {
   User? user = FirebaseAuth.instance.currentUser;
   bool muted = false;
   bool showQuiz = false;
-  SpeechToText _speechToText = SpeechToText();
-  bool _speechEnabled = false;
-  String _speechText = '';
+
   final flutterTts = FlutterTts();
   late var user_email = user?.email;
   final List<Story> stories = [
@@ -86,29 +84,7 @@ class _MainscreenState extends State<Mainscreen> {
   @override
   void initState() {
     super.initState();
-    initStt();
     flutterTts.setLanguage("en-US");
-  }
-
-  Future<void> initStt() async {
-    _speechEnabled = await _speechToText.initialize();
-    setState(() {});
-  }
-  void _startListening() async {
-    await _speechToText.initialize();
-    await _speechToText.listen(onResult: _onSpeechResult);
-    setState(() {});
-  }
-
-  void _stopListening() async {
-    await _speechToText.stop();
-    setState(() {});
-  }
-  void _onSpeechResult(SpeechRecognitionResult result) {
-    setState(() {
-      _speechText = result.recognizedWords;
-      print(_speechText);
-    });
   }
 
   void speakText(String text) async {
@@ -195,7 +171,7 @@ class _MainscreenState extends State<Mainscreen> {
                     height: 40,
                     width: 40,
                     child: FloatingActionButton(
-                        child: Icon(Icons.restart_alt_outlined),
+                        child: Icon(Icons.volume_up),
                         onPressed: (){
                           setState(() {
                             speakText(stories[currentStory].pages[currentPage]);
@@ -203,31 +179,21 @@ class _MainscreenState extends State<Mainscreen> {
                         }
                     )),
                 SizedBox(height: 10,),
-                // SizedBox(
-                //     height: 40,
-                //     width: 40,
-                //     child: FloatingActionButton(
-                //         child: Icon(Icons.volume_off),
-                //         onPressed: () async {
-                //           if(muted){
-                //             await flutterTts.setVolume(1.0);
-                //             muted = false;
-                //           } else{
-                //             await flutterTts.setVolume(0.0);
-                //             muted = true;
-                //           }
-                //         }
-                //     ))
                 SizedBox(
-                  height: 40,
-                  width: 40,
-                  child: FloatingActionButton(
-                    child: Icon(_speechToText.isNotListening ? Icons.mic_off : Icons.mic),
-                    onPressed: () async {
-                      _speechToText.isNotListening ? _startListening() : _stopListening();
-                    },
-                  ),
-                ),
+                    height: 40,
+                    width: 40,
+                    child: FloatingActionButton(
+                        child: Icon(Icons.volume_off),
+                        onPressed: () async {
+                          if(muted){
+                            await flutterTts.setVolume(1.0);
+                            muted = false;
+                          } else{
+                            await flutterTts.setVolume(0.0);
+                            muted = true;
+                          }
+                        }
+                    ))
               ],
             ),
           ),
